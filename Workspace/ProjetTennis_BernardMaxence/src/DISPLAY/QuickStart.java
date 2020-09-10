@@ -57,6 +57,8 @@ class QuickStart extends JFrame {
 			ArrayList<Arbitre> listeArbitre = ((ArbitreDAO) arbitreDAO).getListArbitre();
 			ArrayList<Court> listeCourt = ((CourtDAO) courtDAO).getListCourt();
 	        List<Equipe> gagnants = new ArrayList<Equipe>();
+            List <Equipe> gagnants2 = new ArrayList <Equipe>();
+
 			ArrayList<Joueur> listeHommes = ((JoueurDAO) joueurDAO).getListHomme();
 			
 			for(Joueur j : listeHommes) {
@@ -97,6 +99,9 @@ class QuickStart extends JFrame {
 	        
 	        JButton next =new JButton("Prochain round");    
 	        next.setBounds(10,820,300, 54);	
+	        
+	        JButton next2 =new JButton("Prochain round");    
+	        next2.setBounds(10,820,300, 54);	
 	        
 	        JButton nextf =new JButton("Prochain round");    
 	        nextf.setBounds(10,820,300, 54);
@@ -156,58 +161,7 @@ class QuickStart extends JFrame {
 
 	                      
 	                      
-                      next.addActionListener(new ActionListener() {	            
-                          @Override
-                          public void actionPerformed(ActionEvent arg0) {
-                          contentPane.removeAll();
-   	                      contentPane.add(next);
-   	                      contentPane.add(acc);
-
-                          frame.setSize(1200,600);
-                          int nbg = gagnants.size()/2;
-                          //round = round/2;
-                          Tournoi t2 = new Tournoi(true, nbg , gagnants , listeArbitre, listeCourt);
-                          List<Match> matches2 = t2.lancerMatch();
-
-                          int i =0;
-                          List <Equipe> gagnants = new ArrayList <Equipe>();
-                          for (Match match : matches2) {
-                              JLabel lblj1 = new JLabel(match.getJoueurs().get(0).getJoueurA().getNom());
-                              lblj1.setBounds(10, 11 + (12*i), 414, 54);
-                              contentPane.add(lblj1);
-
-                              JLabel lblj2 = new JLabel(" vs    " + match.getJoueurs().get(1).getJoueurA().getNom());
-                              lblj2.setBounds(90, 11 + (12*i), 414, 54);
-                              contentPane.add(lblj2); 
-
-                              JLabel lblGagnant = new JLabel(" Gagnant : " + match.getGagnant().getJoueurA().getNom());
-                              lblGagnant.setBounds(470, 11 + (12*i), 414, 54);
-                              contentPane.add(lblGagnant);
-
-                              JLabel lblArbitre = new JLabel(" Arbitré par  : " + match.getArbitre().getNom());
-                              lblArbitre.setBounds(620, 11 + (12*i), 414, 54);
-                              contentPane.add(lblArbitre);
-
-                              JLabel lblCourt = new JLabel(" Sur le court : " + match.getCourt().getNomC() + nbg);
-                              lblCourt.setBounds(820, 11 + (12*i), 414, 54);
-                              contentPane.add(lblCourt);
-
-
-                              int j = 0;
-                              for (SetTennis set : match.getSets() ) {
-
-                                  JLabel lblSet = new JLabel(set.scoreA + " - " + set.scoreB + " | ");
-                                  lblSet.setBounds((200 + j), 11 + (12*i), 414, 54);
-                                  contentPane.add(lblSet);
-                                  j+=30;
-                              }
-                             i++;
-                             gagnants.add(match.getGagnant());
-                      }
-                          //gagnants = gagnants2;
-                  }
-                             
-                 });
+                      
                       
                      
                }
@@ -269,13 +223,15 @@ class QuickStart extends JFrame {
 					            contentPane.removeAll();
 				                contentPane.add(nextf);
 				                contentPane.add(acc);
+		                        int nbg = gagnants.size()/2;
 
 					            frame.setSize(1200,600);
-					            Tournoi t2 = new Tournoi(false, 32, gagnants , listeArbitre, listeCourt);
+					            Tournoi t2 = new Tournoi(false, nbg, gagnants , listeArbitre, listeCourt);
 					            List<Match> matches2 = t2.lancerMatch();
 					            System.out.print(matches2.size());
 					            int i =0;
-					
+		                        List <Equipe> gagnants = new ArrayList <Equipe>();
+
 					            for (Match match : matches2) {
 					                JLabel lblj1 = new JLabel(match.getJoueurs().get(0).getJoueurA().getNom());
 					                lblj1.setBounds(10, 11 + (12*i), 414, 54);
@@ -307,6 +263,8 @@ class QuickStart extends JFrame {
 					                        j+=30;
 					                    }
 					                   i++;
+			                           gagnants.add(match.getGagnant());
+
 					            }
 					        }
 					                   
@@ -373,12 +331,14 @@ class QuickStart extends JFrame {
 							            contentPane.removeAll();
 							            contentPane.add(nextf);
 						                contentPane.add(acc);
+				                        int nbg = gagnants.size()/2;
 
 							            frame.setSize(1200,600);
-							            Tournoi t2 = new Tournoi(false, 32, gagnants , listeArbitre, listeCourt);
+							            Tournoi t2 = new Tournoi(false, nbg, gagnants , listeArbitre, listeCourt);
 							            List<Match> matches2 = t2.lancerMatch();
 							            int i =0;
-							
+				                        List <Equipe> gagnants = new ArrayList <Equipe>();
+
 							            for (Match match : matches2) {
 							            	JLabel lblj1 = new JLabel(match.getJoueurs().get(0).getJoueurA().getNom() + " et " + match.getJoueurs().get(0).getJoueurB().getNom());
 							                   lblj1.setBounds(10, 11 + (12*i), 414, 54);
@@ -410,6 +370,8 @@ class QuickStart extends JFrame {
 							                       j+=30;
 							                   }
 							                  i++;
+					                           gagnants.add(match.getGagnant());
+
 							            }
 							        }
 							                   
@@ -434,8 +396,115 @@ class QuickStart extends JFrame {
 			            }
 			            });
 			            
-	    
+			        next.addActionListener(new ActionListener() {	            
+                        @Override
+                        public void actionPerformed(ActionEvent arg0) {
+                        contentPane.removeAll();
+ 	                      contentPane.add(next2);
+ 	                      contentPane.add(acc);
+
+                        frame.setSize(1200,600);
+                        int nbg = gagnants.size()/2;
+                        //round = round/2;
+                        Tournoi t2 = new Tournoi(true, nbg , gagnants , listeArbitre, listeCourt);
+                        List<Match> matches2 = t2.lancerMatch();
+
+                        int i =0;
+                        
+                        for (Match match : matches2) {
+                            JLabel lblj1 = new JLabel(match.getJoueurs().get(0).getJoueurA().getNom());
+                            lblj1.setBounds(10, 11 + (12*i), 414, 54);
+                            contentPane.add(lblj1);
+
+                            JLabel lblj2 = new JLabel(" vs    " + match.getJoueurs().get(1).getJoueurA().getNom());
+                            lblj2.setBounds(90, 11 + (12*i), 414, 54);
+                            contentPane.add(lblj2); 
+
+                            JLabel lblGagnant = new JLabel(" Gagnant : " + match.getGagnant().getJoueurA().getNom());
+                            lblGagnant.setBounds(470, 11 + (12*i), 414, 54);
+                            contentPane.add(lblGagnant);
+
+                            JLabel lblArbitre = new JLabel(" Arbitré par  : " + match.getArbitre().getNom());
+                            lblArbitre.setBounds(620, 11 + (12*i), 414, 54);
+                            contentPane.add(lblArbitre);
+
+                            JLabel lblCourt = new JLabel(" Sur le court : " + match.getCourt().getNomC());
+                            lblCourt.setBounds(820, 11 + (12*i), 414, 54);
+                            contentPane.add(lblCourt);
+
+
+                            int j = 0;
+                            for (SetTennis set : match.getSets() ) {
+
+                                JLabel lblSet = new JLabel(set.scoreA + " - " + set.scoreB + " | ");
+                                lblSet.setBounds((200 + j), 11 + (12*i), 414, 54);
+                                contentPane.add(lblSet);
+                                j+=30;
+                            }
+                           i++;
+                           gagnants2.add(match.getGagnant());
+                    }
+                        //gagnants = gagnants2;
+                }
+                        
+                        
+                           
+               });
 			           
-			
+			        next2.addActionListener(new ActionListener() {	            
+                        @Override
+                        public void actionPerformed(ActionEvent arg0) {
+                        contentPane.removeAll();
+ 	                      contentPane.add(next2);
+ 	                      contentPane.add(acc);
+
+                        frame.setSize(1200,600);
+                        int nbg = gagnants.size()/2;
+                        //round = round/2;
+                        Tournoi t2 = new Tournoi(true, nbg , gagnants2 , listeArbitre, listeCourt);
+                        List<Match> matches2 = t2.lancerMatch();
+
+                        int i =0;
+                        
+                        List <Equipe> gagnants2 = new ArrayList <Equipe>();
+                        for (Match match : matches2) {
+                            JLabel lblj1 = new JLabel(match.getJoueurs().get(0).getJoueurA().getNom());
+                            lblj1.setBounds(10, 11 + (12*i), 414, 54);
+                            contentPane.add(lblj1);
+
+                            JLabel lblj2 = new JLabel(" vs    " + match.getJoueurs().get(1).getJoueurA().getNom());
+                            lblj2.setBounds(90, 11 + (12*i), 414, 54);
+                            contentPane.add(lblj2); 
+
+                            JLabel lblGagnant = new JLabel(" Gagnant : " + match.getGagnant().getJoueurA().getNom());
+                            lblGagnant.setBounds(470, 11 + (12*i), 414, 54);
+                            contentPane.add(lblGagnant);
+
+                            JLabel lblArbitre = new JLabel(" Arbitré par  : " + match.getArbitre().getNom());
+                            lblArbitre.setBounds(620, 11 + (12*i), 414, 54);
+                            contentPane.add(lblArbitre);
+
+                            JLabel lblCourt = new JLabel(" Sur le court : " + match.getCourt().getNomC());
+                            lblCourt.setBounds(820, 11 + (12*i), 414, 54);
+                            contentPane.add(lblCourt);
+
+
+                            int j = 0;
+                            for (SetTennis set : match.getSets() ) {
+
+                                JLabel lblSet = new JLabel(set.scoreA + " - " + set.scoreB + " | ");
+                                lblSet.setBounds((200 + j), 11 + (12*i), 414, 54);
+                                contentPane.add(lblSet);
+                                j+=30;
+                            }
+                           i++;
+                           gagnants2.add(match.getGagnant());
+                    }
+                        //gagnants = gagnants2;
+                }
+                        
+                        
+                           
+               });
 			 }}
 
