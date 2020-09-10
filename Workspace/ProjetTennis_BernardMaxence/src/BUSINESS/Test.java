@@ -1,6 +1,7 @@
 package BUSINESS;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import DAO.ArbitreDAO;
@@ -22,9 +23,9 @@ public class Test {
 		DAO<Joueur> joueurDAO = new JoueurDAO(ConnectionTennis.getInstance());
 		DAO<Arbitre> arbitreDAO = new ArbitreDAO(ConnectionTennis.getInstance());
 		DAO<Court> courtDAO = new CourtDAO(ConnectionTennis.getInstance());
+		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 
-
-
+		ArrayList<Joueur> joueurs = ((JoueurDAO) joueurDAO).getAll();
 		ArrayList<Joueur> listeHomme = ((JoueurDAO) joueurDAO).getListHomme();
 		
 		//for(int i = 0; i < listeHomme.size(); i++)
@@ -42,10 +43,44 @@ public class Test {
 			//System.out.println(listeCourt.get(i).getIdC() + " " + listeCourt.get(i).getNomC() );
 		
 
-        Tournoi algo = new Tournoi(true, 64, listeHomme, listeArbitre, listeCourt);
-        List<Match> matches = algo.lancerMatch();
-        System.out.print(matches.size());
+        //Tournoi algo = new Tournoi(true, 64, listeHomme, listeArbitre, listeCourt);
+        //List<Match> matches = algo.lancerMatch();
+        //System.out.print(matches.size());
+        
+        
+        Collections.shuffle(joueurs);
+		for(int i = 0 ; i < 256 ; i+=2) {
+        	Equipe e = new Equipe(joueurs.get(i), joueurs.get((i+1)));
+        	equipes.add(e); 
+        
+        
+        
 
 	}
+		int i = 1;
+		for (Equipe e : equipes)
+		{
+			
+			System.out.println("Equipe " + i + " : " +e.getJoueurA().getNom() + " et  " + e.getJoueurB().getNom()) ;
+			i++;
+		
+		}
+		
+		int cpt = 0;
+		for(Joueur j : listeHomme) {
+			Equipe e = new Equipe(j);
+			cpt++;
+			System.out.println("Equipe " + cpt + " : " +e.getJoueurA().getNom()) ;
 
+		}
+		
+		int cpt2 = 0;
+		for(Joueur j : listeFemme) {
+			Equipe e = new Equipe(j);
+			cpt2++;
+			System.out.println("Equipe " + cpt2 + " : " +e.getJoueurA().getNom()) ;
+
+		}
+
+}
 }

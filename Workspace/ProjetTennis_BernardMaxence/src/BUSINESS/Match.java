@@ -3,15 +3,15 @@ package BUSINESS;
 import java.util.List;
 
 public class Match {
-    private List<Joueur> Joueurs;
-    private Joueur Gagnant;
+    private List<Equipe> Joueurs;
+    private Equipe Gagnant;
     private List<SetTennis> Sets; 
     private Arbitre Arbitre;
     private Court Court;
     private int num;
    
     
-    public Match(List<Joueur> joueurs, List<SetTennis> sets, Arbitre arbitre, Court court, int nm, Joueur gagnant) {
+    public Match(List<Equipe> joueurs, List<SetTennis> sets, Arbitre arbitre, Court court, int nm, Equipe gagnant) {
         Joueurs = joueurs;
         Sets = sets;
         Arbitre = arbitre;
@@ -21,22 +21,22 @@ public class Match {
     }
 
 
-	public List<Joueur> getJoueurs() {
+	public List<Equipe> getJoueurs() {
 		return Joueurs;
 	}
 
 
-	public void setJoueurs(List<Joueur> joueurs) {
+	public void setJoueurs(List<Equipe> joueurs) {
 		Joueurs = joueurs;
 	}
 
 
-	public Joueur getGagnant() {
+	public Equipe getGagnant() {
 		return Gagnant;
 	}
 
 
-	public void setGagnant(Joueur gagnant) {
+	public void setGagnant(Equipe gagnant) {
 		Gagnant = gagnant;
 	}
 

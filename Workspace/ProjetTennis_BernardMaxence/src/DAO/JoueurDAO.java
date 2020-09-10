@@ -81,6 +81,22 @@ public class JoueurDAO extends DAO<Joueur>{
 			return femmeListe;
 				
 		}
+	
+	public ArrayList<Joueur> getAll(){
+		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
+		try {
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Joueur A INNER JOIN Personne B ON A.id=B.id");
+					while(result.next())
+						joueur.add(new Joueur(result.getInt("Id"), result.getString("Nom"), result.getString("Sexe")));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return joueur;
+			
+	}
 	}
 
 

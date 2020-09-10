@@ -14,10 +14,10 @@ public class Tournoi {
     LocalDateTime dateDepart = LocalDateTime.of(2019, 05, 26, 10, 0);
 	List <Arbitre> arbitre = new ArrayList<Arbitre>();
     List <Court> court = new ArrayList<Court>();
-    List<Joueur> joueurs = new ArrayList<Joueur>();
+    List<Equipe> joueurs = new ArrayList<Equipe>();
     
 
-	public Tournoi( boolean h, int or, List<Joueur> JoueursList, List<Arbitre> listeArbitre, List<Court> listeCourt)
+	public Tournoi( boolean h, int or, List<Equipe> JoueursList, List<Arbitre> listeArbitre, List<Court> listeCourt)
 	{
 		hommeS = h;
         ord = or;
@@ -108,7 +108,7 @@ public class Tournoi {
 			arbitreu.add(arbitre.get(cptarbitre));
             courtu.add(court.get(cptcourt));
             
-            List<Joueur> joueursMatch = new ArrayList<Joueur>();
+            List<Equipe> joueursMatch = new ArrayList<Equipe>();
             joueursMatch.add(joueurs.get(j));
             joueursMatch.add(joueurs.get(j+1));
 			if(setj1 == setgg){
